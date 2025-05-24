@@ -10,15 +10,15 @@ export default function Home() {
 
   useEffect(() => {
     getBooks()
-      .then(data => setBooks(data))
-      .catch(err => console.error(err))
+      .then((data) => setBooks(data))
+      .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, []);
 
   const handleAddOrEdit = (bookData) => {
     if (!bookToEdit) {
       addBook(bookData).then((newBook) =>
-        setBooks(prev => [...prev, newBook])
+        setBooks((prev) => [...prev, newBook]),
       );
     }
   };
@@ -46,7 +46,7 @@ export default function Home() {
       {loading ? (
         <p>Loading books...</p>
       ) : books.length ? (
-        books.map(book => (
+        books.map((book) => (
           <BookCard
             key={book.id}
             book={book}

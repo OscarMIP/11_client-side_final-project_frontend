@@ -20,7 +20,7 @@ export default function BookForm({ onSubmit, bookToEdit, cancelEdit }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: name === "year" ? Number(value) : value,
     }));
