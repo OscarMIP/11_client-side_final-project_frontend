@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import BookCard from "../components/BookCard";
 import BookForm from "../components/BookForm";
-import { getBooks, addBook } from "../services/bookService";
+import {
+  getBooks,
+  addBook,
+  updateBook,
+  deleteBook
+} from "../services/bookService";
 
 export default function Home() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [bookToEdit, setBookToEdit] = useState(null);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     getBooks()
@@ -15,11 +21,20 @@ export default function Home() {
       .finally(() => setLoading(false));
   }, []);
 
-  const handleAddOrEdit = (bookData) => {
-    if (!bookToEdit) {
-      addBook(bookData).then((newBook) =>
-        setBooks((prev) => [...prev, newBook]),
-      );
+  const handleAddOrEdit = async (bookData) => {
+    try {
+      if (!bookToEdit) {
+        const newBook = await addBook(bookData);
+        setBooks(prev => [...prev, newBook]);
+      } else {
+        const updated = await updateBook(bookData);
+        setBooks(prev =>
+          prev.map(book => (book.id === updated.id ? updated : book))
+        );
+        setBookToEdit(null);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -31,18 +46,36 @@ export default function Home() {
     setBookToEdit(null);
   };
 
-  const handleDelete = (id) => {
-    console.log("Delete book with ID:", id);
+  const handleDelete = async (id) => {
+    try {
+      await deleteBook(id);
+      setBooks(prev => prev.filter(book => book.id !== id));
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
     <div>
-      <h1>📚 Book List</h1>
-      <BookForm
-        onSubmit={handleAddOrEdit}
-        bookToEdit={bookToEdit}
-        cancelEdit={handleCancelEdit}
-      />
+      <h1 className="mainTitle">My Book Collection📚</h1>
+      {(!showForm && !bookToEdit) && (
+        <button className="add-book-btn" onClick={() => setShowForm(true)}>
+          Add Book
+        </button>
+      )}
+      {(showForm || bookToEdit) && (
+        <BookForm
+          onSubmit={(data) => {
+            handleAddOrEdit(data);
+            setShowForm(false);
+          }}
+          bookToEdit={bookToEdit}
+          cancelEdit={() => {
+            handleCancelEdit();
+            setShowForm(false);
+          }}
+        />
+      )}
       {loading ? (
         <p>Loading books...</p>
       ) : books.length ? (
@@ -60,3 +93,4 @@ export default function Home() {
     </div>
   );
 }
+

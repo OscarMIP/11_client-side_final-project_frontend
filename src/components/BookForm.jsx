@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import styles from "../styles/BookForm.module.css";
 
 const initialForm = {
   title: "",
@@ -33,54 +34,65 @@ export default function BookForm({ onSubmit, bookToEdit, cancelEdit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>{bookToEdit ? "Edit Book" : "Add Book"}</h2>
-
-      <input
-        type="text"
-        name="title"
-        placeholder="Title"
-        value={formData.title}
-        onChange={handleChange}
-        required
-      />
-
-      <input
-        type="text"
-        name="author"
-        placeholder="Author"
-        value={formData.author}
-        onChange={handleChange}
-        required
-      />
-
-      <input
-        type="number"
-        name="year"
-        placeholder="Year"
-        value={formData.year}
-        onChange={handleChange}
-        required
-      />
-
-      <select
-        name="status"
-        value={formData.status}
-        onChange={handleChange}
-        required
-      >
-        <option value="pending">Pending</option>
-        <option value="in progress">In Progress</option>
-        <option value="read">Read</option>
-      </select>
-
-      <button type="submit">{bookToEdit ? "Update" : "Add"}</button>
-
-      {bookToEdit && (
-        <button type="button" onClick={cancelEdit}>
-          Cancel
-        </button>
-      )}
-    </form>
+    <div className={styles.bookFormContainer}>
+      <button type="button" className={styles.cancelBtn} onClick={cancelEdit}>Cancel</button>
+      <h3 className={styles.formTitle}>Add New Book</h3>
+      <form onSubmit={handleSubmit} className={styles.bookFormFields}>
+        <label className={styles.formLabel}>
+          Title
+          <input
+            type="text"
+            name="title"
+            placeholder="Enter book title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+            className={styles.formInput}
+          />
+        </label>
+        
+        <label className={styles.formLabel}>
+          Author
+          <input
+            type="text"
+            name="author"
+            placeholder="Enter author name"
+            value={formData.author}
+            onChange={handleChange}
+            required
+            className={styles.formInput}
+          />
+        </label>
+        
+        <label className={styles.formLabel}>
+          Publication Year
+          <input
+            type="number"
+            name="year"
+            placeholder="2025"
+            value={formData.year}
+            onChange={handleChange}
+            required
+            className={styles.formInput}
+          />
+        </label>
+        
+        <label className={styles.formLabel}>
+          Reading Status
+          <select
+            name="status"
+            value={formData.status}
+            onChange={handleChange}
+            className={styles.formInput}
+            required
+          >
+            <option value="pending">Pending</option>
+            <option value="in progress">In Progress</option>
+            <option value="read">Read</option>
+          </select>
+        </label>
+        <button type="submit" className={styles.addBtn}>Add Book</button>
+      </form>
+    </div>
   );
 }
