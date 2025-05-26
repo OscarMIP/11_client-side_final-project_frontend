@@ -35,7 +35,9 @@ export default function BookForm({ onSubmit, bookToEdit, cancelEdit }) {
 
   return (
     <div className={styles.bookFormContainer}>
-      <button type="button" className={styles.cancelBtn} onClick={cancelEdit}>Cancel</button>
+      <button type="button" className={styles.cancelBtn} onClick={cancelEdit}>
+        Cancel
+      </button>
       <h3 className={styles.formTitle}>Add New Book</h3>
       <form onSubmit={handleSubmit} className={styles.bookFormFields}>
         <label className={styles.formLabel}>
@@ -50,7 +52,7 @@ export default function BookForm({ onSubmit, bookToEdit, cancelEdit }) {
             className={styles.formInput}
           />
         </label>
-        
+
         <label className={styles.formLabel}>
           Author
           <input
@@ -63,7 +65,7 @@ export default function BookForm({ onSubmit, bookToEdit, cancelEdit }) {
             className={styles.formInput}
           />
         </label>
-        
+
         <label className={styles.formLabel}>
           Publication Year
           <input
@@ -76,7 +78,7 @@ export default function BookForm({ onSubmit, bookToEdit, cancelEdit }) {
             className={styles.formInput}
           />
         </label>
-        
+
         <label className={styles.formLabel}>
           Reading Status
           <select
@@ -91,7 +93,9 @@ export default function BookForm({ onSubmit, bookToEdit, cancelEdit }) {
             <option value="read">Read</option>
           </select>
         </label>
-        <button type="submit" className={styles.addBtn}>Add Book</button>
+        <button type="submit" className={styles.addBtn}>
+          Add Book
+        </button>
       </form>
     </div>
   );

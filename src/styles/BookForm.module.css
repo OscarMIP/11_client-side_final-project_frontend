@@ -2,7 +2,7 @@
   background: #fff;
   border-radius: 10px;
   padding: 24px 16px 32px 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   max-width: 350px;
   margin: 32px auto;
   position: relative;
@@ -26,7 +26,7 @@
 }
 
 .mainTitle {
-  font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
+  font-family: "Poppins", "Montserrat", Arial, sans-serif;
   font-weight: 700;
   font-size: 2.1em;
   color: #1a1a1a;

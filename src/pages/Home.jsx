@@ -5,7 +5,7 @@ import {
   getBooks,
   addBook,
   updateBook,
-  deleteBook
+  deleteBook,
 } from "../services/bookService";
 
 export default function Home() {
@@ -25,11 +25,11 @@ export default function Home() {
     try {
       if (!bookToEdit) {
         const newBook = await addBook(bookData);
-        setBooks(prev => [...prev, newBook]);
+        setBooks((prev) => [...prev, newBook]);
       } else {
         const updated = await updateBook(bookData);
-        setBooks(prev =>
-          prev.map(book => (book.id === updated.id ? updated : book))
+        setBooks((prev) =>
+          prev.map((book) => (book.id === updated.id ? updated : book)),
         );
         setBookToEdit(null);
       }
@@ -49,7 +49,7 @@ export default function Home() {
   const handleDelete = async (id) => {
     try {
       await deleteBook(id);
-      setBooks(prev => prev.filter(book => book.id !== id));
+      setBooks((prev) => prev.filter((book) => book.id !== id));
     } catch (err) {
       console.error(err);
     }
@@ -58,7 +58,7 @@ export default function Home() {
   return (
     <div>
       <h1 className="mainTitle">My Book Collection📚</h1>
-      {(!showForm && !bookToEdit) && (
+      {!showForm && !bookToEdit && (
         <button className="add-book-btn" onClick={() => setShowForm(true)}>
           Add Book
         </button>
@@ -93,4 +93,3 @@ export default function Home() {
     </div>
   );
 }
-
