@@ -21,10 +21,17 @@ export default function BookForm({ onSubmit, bookToEdit, cancelEdit }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: name === "year" ? Number(value) : value,
-    }));
+
+    const newFormData = {
+      title: formData.title,
+      author: formData.author,
+      year: formData.year,
+      status: formData.status,
+    };
+
+    newFormData[name] = name === "year" ? Number(value) : value;
+
+    setFormData(newFormData);
   };
 
   const handleSubmit = (e) => {
@@ -35,11 +42,17 @@ export default function BookForm({ onSubmit, bookToEdit, cancelEdit }) {
 
   return (
     <div className={styles.bookFormContainer}>
+      
       <button type="button" className={styles.cancelBtn} onClick={cancelEdit}>
         Cancel
       </button>
-      <h3 className={styles.formTitle}>Add New Book</h3>
+      
+      <h3 className={styles.formTitle}>
+        {bookToEdit ? "Edit Book" : "Add New Book"}
+      </h3>
+
       <form onSubmit={handleSubmit} className={styles.bookFormFields}>
+        
         <label className={styles.formLabel}>
           Title
           <input
@@ -71,7 +84,7 @@ export default function BookForm({ onSubmit, bookToEdit, cancelEdit }) {
           <input
             type="number"
             name="year"
-            placeholder="2025"
+            placeholder="Year"
             value={formData.year}
             onChange={handleChange}
             required
@@ -93,8 +106,9 @@ export default function BookForm({ onSubmit, bookToEdit, cancelEdit }) {
             <option value="read">Read</option>
           </select>
         </label>
+
         <button type="submit" className={styles.addBtn}>
-          Add Book
+          {bookToEdit ? "Update Book" : "Add Book"}
         </button>
       </form>
     </div>
