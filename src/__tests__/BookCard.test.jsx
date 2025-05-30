@@ -15,9 +15,7 @@ describe("BookCard", () => {
     const onEdit = vi.fn();
     const onDelete = vi.fn();
 
-    render(
-      <BookCard book={mockBook} onEdit={onEdit} onDelete={onDelete} />
-    );
+    render(<BookCard book={mockBook} onEdit={onEdit} onDelete={onDelete} />);
 
     fireEvent.click(screen.getByText(/Edit/i));
     fireEvent.click(screen.getByText(/Delete/i));

@@ -6,7 +6,7 @@ Aplicació web per gestionar una col·lecció de llibres amb funcionalitat compl
 
 ## 🔗 Desplegament
 
-- 🌐 URL Netlify: [https://booktracker.netlify.app](https://booktracker.netlify.app)  
+- 🌐 URL Netlify: [https://booktracker.netlify.app](https://booktracker.netlify.app)
 - 🛠️ Backend JSON Server: desplegat a [Render](https://render.com)
 
 ---
@@ -39,3 +39,4 @@ M07 – Aplicacions Web Client Side
 ```bash
 git clone https://github.com/OscarMIP/11_client-side_final-project_frontend.git
 cd 11_client-side_final-project_frontend
+```

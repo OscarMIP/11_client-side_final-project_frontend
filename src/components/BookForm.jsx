@@ -42,17 +42,15 @@ export default function BookForm({ onSubmit, bookToEdit, cancelEdit }) {
 
   return (
     <div className={styles.bookFormContainer}>
-      
       <button type="button" className={styles.cancelBtn} onClick={cancelEdit}>
         Cancel
       </button>
-      
+
       <h3 className={styles.formTitle}>
         {bookToEdit ? "Edit Book" : "Add New Book"}
       </h3>
 
       <form onSubmit={handleSubmit} className={styles.bookFormFields}>
-        
         <label className={styles.formLabel}>
           Title
           <input
